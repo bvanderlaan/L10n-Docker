@@ -10,8 +10,6 @@ services:
             - "8383:3000"
         links: 
             - db:l10ndb
-        volumes:
-            - ~/Development/website-l10n:/usr/src/app
         command: bash -c "rm -f /usr/src/app/tmp/pids/server.pid && rake db:migrate && rake db:seed && rails s -p 3000 -b '0.0.0.0'"
         restart: always
     db:
