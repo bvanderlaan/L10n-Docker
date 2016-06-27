@@ -1,0 +1,27 @@
+version: '2'
+services:
+    web:
+        container_name: l10n
+        build: ./l10n
+        image: l10n:latest
+        environment: 
+            - DATABASE_URL=mysql2://l10ndb:3306/l10n_development
+        ports:
+            - "8383:3000"
+        links: 
+            - db:l10ndb
+        volumes:
+            - ~/Development/website-l10n:/usr/src/app
+        command: bash -c "rm -f /usr/src/app/tmp/pids/server.pid && rake db:migrate && rake db:seed && rails s -p 3000 -b '0.0.0.0'"
+        restart: always
+    db:
+        container_name: l10ndb
+        image: mysql:5.7.12
+        environment:
+            - MYSQL_ROOT_PASSWORD=secret-p@$$$$w0rd
+            - MYSQL_PASSWORD=p@$$$$word
+            - MYSQL_USER=l10nadmin
+            - MYSQL_DATABASE=l10n_development
+        volumes:
+            - /mnt/DB/l10ndb:/var/lib/mysql
+        restart: always    
