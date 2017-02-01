@@ -18,7 +18,7 @@ To learn more about L10n or to contibute to it see [Project L10n](http://bvander
 
 ## How to use this image
 
-`docker run -e SECRET_KEY_BASE=***** -e L10N_DATABASE=l10n_production L10N_DATABASE_USER=l10nadmin -e L10N_DATABASE_PASSWORD=**** DATABASE_URL=mysql2://l10ndbserver.local:3306/l10n_production l10n:latest`
+`docker run -e SECRET_KEY_BASE=***** -e L10N_DATABASE=l10n_production L10N_DATABASE_USER=l10nadmin -e L10N_DATABASE_PASSWORD=**** -e DATABASE_URL=mysql2://l10ndbserver.local:3306/l10n_production l10n:latest`
 
 This will create a container running the latest version of L10n that will connect to a MySQL server to store all translated phrases inputted into L10n.
 This means that all the data will be presisted in the database meaning it would be safe to destory the container and spin up a new one.
@@ -109,7 +109,7 @@ You can now exit and remove this container `# exit` then `$ docker rm database_g
 
 At this point the database is setup and ready to be used by a L10n container. Start a new L10n container ensuring to populate the required environment variables.
 
-`docker run -e SECRET_KEY_BASE=***** -e L10N_DATABASE=l10n_production L10N_DATABASE_USER=l10nadmin -e L10N_DATABASE_PASSWORD=**** DATABASE_URL=mysql2://l10ndbserver.local:3306/l10n_production l10n:latest`
+`docker run -e SECRET_KEY_BASE=***** -e L10N_DATABASE=l10n_production L10N_DATABASE_USER=l10nadmin -e L10N_DATABASE_PASSWORD=**** -e DATABASE_URL=mysql2://l10ndbserver.local:3306/l10n_production l10n:latest`
 
 ## Docker-Compose
 
