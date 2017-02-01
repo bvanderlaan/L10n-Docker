@@ -4,11 +4,15 @@ services:
         container_name: l10n
         build: ./l10n
         image: l10n:latest
-        environment: 
-            - DATABASE_URL=mysql2://l10ndb:3306/l10n_development
+        environment:
+            - SECRET_KEY_BASE=63e963fef64ae5a7abef8b1a8e6d80f1fb7deb48bf5984b8ab32e1af171ebd4748a9f467e4fa7e4ce5fa2867fbea7f6c0d3ba8e8ef3d855347313cb70a28fe8b
+            - L10N_DATABASE=l10n_production
+            - L10N_DATABASE_USER=l10nadmin
+            - L10N_DATABASE_PASSWORD=p@ssw0rd
+            - DATABASE_URL=mysql2://l10ndb:3306/l10n_production
         ports:
-            - "8383:3000"
-        links: 
+            - "8080:3000"
+        links:
             - db:l10ndb
         command: bash -c "rm -f /usr/src/app/tmp/pids/server.pid && rake db:migrate && rake db:seed && rails s -p 3000 -b '0.0.0.0'"
         restart: always
@@ -16,11 +20,11 @@ services:
         container_name: l10ndb
         image: mysql:5.7.12
         environment:
-            - MYSQL_ROOT_PASSWORD=secret-p@$$$$w0rd
-            - MYSQL_PASSWORD=p@$$$$word
+            - MYSQL_ROOT_PASSWORD=secret-p@ssw0rd
+            - MYSQL_PASSWORD=p@ssw0rd
             - MYSQL_USER=l10nadmin
-            - MYSQL_DATABASE=l10n_development
+            - MYSQL_DATABASE=l10n_production
         volumes:
             - /mnt/DB/l10ndb:/var/lib/mysql
         command: [mysqld, --character-set-server=utf8mb4, --collation-server=utf8mb4_unicode_ci]
-        restart: always    
+        restart: always
