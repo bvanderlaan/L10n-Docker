@@ -2,7 +2,8 @@
 
 ## Supported tags and respective `Dockerfile` links
 
-* `latest` [Dockerfile](l10n/Dockerfile)
+* `dev` [Dockerfile](l10n/Dockerfile)
+* `1.0.0` `latest` [Dockerfile](l10n/1.0.0/Dockerfile)
 
 ## What is L10n?
 

@@ -12,7 +12,7 @@ RUN apt-get update -qq && apt-get install -y --no-install-recommends \
 RUN mkdir /usr/src/app
 WORKDIR /usr/src/app
 
-RUN git clone https://github.com/bvanderlaan/L10n.git .
+RUN git clone https://github.com/bvanderlaan/L10n.git . && git checkout v1.0.0
 RUN sed -i "s/username: l10n$/username: <%= ENV['L10N_DATABASE_USER'] %>/" config/database.yml
 RUN sed -i "s/database: l10n_production$/database: <%= ENV['L10N_DATABASE'] %>/" config/database.yml
 RUN bundle install
